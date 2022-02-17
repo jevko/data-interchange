@@ -19,7 +19,7 @@ const toString = (jevko, schema) => {
 
 const toNumber = (jevko, schema) => {
   const {subjevkos, suffix} = jevko
-  if (subjevkos.length > 0) throw Error('nonempty subjevkos in string')
+  if (subjevkos.length > 0) throw Error('nonempty subjevkos in number')
   const trimmed = suffix.trim()
   if (trimmed === 'NaN') return NaN
   const num = Number(trimmed)
@@ -29,7 +29,7 @@ const toNumber = (jevko, schema) => {
 
 const toBoolean = (jevko, schema) => {
   const {subjevkos, suffix} = jevko
-  if (subjevkos.length > 0) throw Error('nonempty subjevkos in string')
+  if (subjevkos.length > 0) throw Error('nonempty subjevkos in boolean')
   if (suffix === 'true') return true
   if (suffix === 'false') return false
   throw Error('not a boolean')
@@ -37,8 +37,9 @@ const toBoolean = (jevko, schema) => {
 
 const toNull = (jevko, schema) => {
   const {subjevkos, suffix} = jevko
-  if (subjevkos.length > 0) throw Error('nonempty subjevkos in string')
-  if (suffix === 'null' || suffix === '') return null
+  if (subjevkos.length > 0) throw Error('nonempty subjevkos in null')
+  const trimmed = suffix.trim()
+  if (trimmed === 'null' || suffix === '') return null
   throw Error('not a null')
 }
 
