@@ -1,0 +1,9 @@
+{
+  "type": "module",
+  "name": "interjevko.js",
+  "main": "bundle.js",
+  "files": ["bundle.js"],
+  "private": true,
+  "author": "Darius J Chuck",
+  "license": "MIT"
+}
