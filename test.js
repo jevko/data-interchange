@@ -1,7 +1,9 @@
-import {parseJevko} from 'https://cdn.jsdelivr.net/gh/jevko/parsejevko.js@v0.1.3/mod.js'
+import {parseJevko, sjevkoToSchema} from './devDeps.js'
 
-import {jevkoToValue} from './jevkoToValue.js'
-import { jevkoToSchema } from './jevkoToSchema.js'
+import {jevkoBySchemaToValue} from './jevkoBySchemaToValue.js'
+import { jevkoToHtml } from './jevkoToHtml.js'
+
+// todo: fix
 
 const jevkoStr = `
 first name [John]
@@ -32,7 +34,7 @@ const schemaStr = `
 first name [string]
 last name [string]
 is alive [boolean]
-age [number]
+age [float64]
 address [
   street address [string]
   city [string]
@@ -54,7 +56,7 @@ const expectedSchema = {
     "first name": {type: "string"},
     "last name": {type: "string"},
     "is alive": {type: "boolean"},
-    "age": {type: "number"},
+    "age": {type: "float64"},
     "address": {
       type: "object",
       props: {
@@ -100,8 +102,10 @@ const expectedObject = {
 
 const parsedJevko = parseJevko(jevkoStr)
 
-console.log(jevkoToValue(parsedJevko, expectedSchema))
+console.log(jevkoBySchemaToValue(parsedJevko, expectedSchema))
 
-const schema = jevkoToSchema(parseJevko(schemaStr))
+const schema = sjevkoToSchema(parseJevko(schemaStr))
 
-console.log(jevkoToValue(parsedJevko, schema))
+console.log(jevkoBySchemaToValue(parsedJevko, schema))
+
+console.log(jevkoToHtml(parsedJevko, schema))
